@@ -37,7 +37,7 @@ export default {
         date: new Date(Date.now() - 10000000),
       },
       {
-        title: 'Application has been approved.',
+        title: 'Test notifications.',
         date: new Date(Date.now() - 50000000),
       },
     ],
@@ -106,7 +106,7 @@ export default {
             routeList,
           },
         })
-        if (pathMatchRegexp(['/','/login'], window.location.pathname)) {
+        if (pathMatchRegexp(['/', '/login'], window.location.pathname)) {
           router.push({
             pathname: '/dashboard',
           })

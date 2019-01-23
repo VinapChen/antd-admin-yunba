@@ -55,12 +55,35 @@ function Sales({ data }) {
         if (str[i]['name'] == 'mysql.read.latency') {
           // console.log(msg_value["value"])
           // console.log(msg["value"].length+msg["value"][0]["yVal"])
+          var date
+          var D = ''
+          var T = ''
 
           for (var j = 0; j < msg['value'].length; j++) {
+            date = new Date(msg['value'][j]['xVal'])
+            D =
+              date.getFullYear() +
+              '-' +
+              (date.getMonth() + 1 < 10
+                ? '0' + (date.getMonth() + 1)
+                : date.getMonth() + 1) +
+              '-' +
+              (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) +
+              ' '
+            T =
+              (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) +
+              ':' +
+              (date.getMinutes() < 10
+                ? '0' + date.getMinutes()
+                : date.getMinutes()) +
+              ':' +
+              (date.getSeconds() < 10
+                ? '0' + date.getSeconds()
+                : date.getSeconds())
             var jsonTemp = {
               name: msg['name'],
               'mysql.read.latency': msg['value'][j]['yVal'],
-              xVal: msg['value'][j]['xVal'] + j,
+              xVal: D + T,
             }
 
             jsonarray.push(jsonTemp)
@@ -69,7 +92,14 @@ function Sales({ data }) {
           console.log(jsonarray)
         } else {
           for (var k = 0; k < msg['value'].length; k++) {
-            var jsonTemp = { name: msg['name'], value: msg['value'][k]['yVal'] }
+            if (msg['value'][k]['yVal'] == null) {
+              var jsonTemp = { name: msg['name'], value: 0 }
+            } else {
+              var jsonTemp = {
+                name: msg['name'],
+                value: msg['value'][k]['yVal'],
+              }
+            }
 
             counter_jsonarray.push(jsonTemp)
           }
@@ -89,7 +119,7 @@ function Sales({ data }) {
   return (
     <div>
       <div className={styles.sales}>
-        <div className={styles.title}>{chartname}</div>
+        <div className={styles.title}>{chartname + '(ns)'}</div>
         <ResponsiveContainer minHeight={360}>
           <LineChart data={jsonarray}>
             <CartesianGrid strokeDasharray="3 3" />

@@ -25,6 +25,8 @@ var counter_jsonstr = '[]'
 var counter_jsonarray = eval('(' + counter_jsonstr + ')')
 var chartname = ''
 
+var allcounter = 0
+
 function Sales({ data }) {
   // setTimeout(
   //   function ()
@@ -59,7 +61,37 @@ function Sales({ data }) {
           var D = ''
           var T = ''
 
-          for (var j = 0; j < msg['value'].length; j++) {
+          console.log('allcounter' + allcounter)
+          for (var j = allcounter; j < msg['value'].length; j++) {
+            date = new Date(msg['value'][j]['xVal'])
+            D =
+              date.getFullYear() +
+              '-' +
+              (date.getMonth() + 1 < 10
+                ? '0' + (date.getMonth() + 1)
+                : date.getMonth() + 1) +
+              '-' +
+              (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) +
+              ' '
+            T =
+              (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) +
+              ':' +
+              (date.getMinutes() < 10
+                ? '0' + date.getMinutes()
+                : date.getMinutes()) +
+              ':' +
+              (date.getSeconds() < 10
+                ? '0' + date.getSeconds()
+                : date.getSeconds())
+            var jsonTemp = {
+              name: msg['name'],
+              'mysql.read.latency': msg['value'][j]['yVal'],
+              xVal: D + T,
+            }
+
+            jsonarray.push(jsonTemp)
+          }
+          for (var j = 0; j < allcounter; j++) {
             date = new Date(msg['value'][j]['xVal'])
             D =
               date.getFullYear() +
@@ -91,6 +123,9 @@ function Sales({ data }) {
           chartname = msg['name']
           console.log(jsonarray)
         } else {
+          if (str[i]['name'] == 'mysql.read.all.count') {
+            allcounter = msg['value'][0]['yVal'] % 100
+          }
           for (var k = 0; k < msg['value'].length; k++) {
             if (msg['value'][k]['yVal'] == null) {
               var jsonTemp = { name: msg['name'], value: 0 }

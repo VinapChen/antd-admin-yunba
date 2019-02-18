@@ -62,6 +62,7 @@ function Sales({ data }) {
           var T = ''
 
           console.log('allcounter' + allcounter)
+          //超过100 从头覆盖，给数组显示排序，allcounter%100 ~ 100 为发生在前的数据
           for (var j = allcounter; j < msg['value'].length; j++) {
             date = new Date(msg['value'][j]['xVal'])
             D =
@@ -85,7 +86,7 @@ function Sales({ data }) {
                 : date.getSeconds())
             var jsonTemp = {
               name: msg['name'],
-              'mysql.read.latency': msg['value'][j]['yVal'],
+              'mysql.read.latency': msg['value'][j]['yVal'] / 1000000,
               xVal: D + T,
             }
 
@@ -114,7 +115,7 @@ function Sales({ data }) {
                 : date.getSeconds())
             var jsonTemp = {
               name: msg['name'],
-              'mysql.read.latency': msg['value'][j]['yVal'],
+              'mysql.read.latency': msg['value'][j]['yVal'] / 1000000,
               xVal: D + T,
             }
 
@@ -154,7 +155,7 @@ function Sales({ data }) {
   return (
     <div>
       <div className={styles.sales}>
-        <div className={styles.title}>{chartname + '(ns)'}</div>
+        <div className={styles.title}>{chartname + '(ms)'}</div>
         <ResponsiveContainer minHeight={360}>
           <LineChart data={jsonarray}>
             <CartesianGrid strokeDasharray="3 3" />

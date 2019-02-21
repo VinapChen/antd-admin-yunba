@@ -1,6 +1,6 @@
 module.exports = {
-  siteName: 'AntD Yunba',
-  copyright: ' Yunba  © 2019 ',
+  siteName: '',
+  copyright: ' ',
   logoPath: '/logo.svg',
   apiPrefix: '/api/v1',
   fixedHeader: true, // sticky primary layout header

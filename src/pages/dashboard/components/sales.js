@@ -51,6 +51,16 @@ function Sales({ data }) {
       jsonarray = eval('(' + jsonstr + ')')
       counter_jsonstr = '[]'
       counter_jsonarray = eval('(' + counter_jsonstr + ')')
+      //先取到总数，方便延迟数组排序
+      for (var i = 0; i < str.length; i++) {
+        if (str[i]['name'] == 'mysql.read.all.count') {
+          allcounter = str[i]['value'][0]['yVal'] % 100
+        } else {
+          allcounter = 0
+        }
+      }
+
+      //解析json数据 转换数据
       for (var i = 0; i < str.length; i++) {
         var msg = eval(str[i])
         // chartname[i] = str[i]["name"];
@@ -123,10 +133,9 @@ function Sales({ data }) {
           }
           chartname = msg['name']
           console.log(jsonarray)
+
+          allcounter = 0
         } else {
-          if (str[i]['name'] == 'mysql.read.all.count') {
-            allcounter = msg['value'][0]['yVal'] % 100
-          }
           for (var k = 0; k < msg['value'].length; k++) {
             if (msg['value'][k]['yVal'] == null) {
               var jsonTemp = { name: msg['name'], value: 0 }

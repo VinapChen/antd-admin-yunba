@@ -1,6 +1,6 @@
 module.exports = {
   siteName: 'AntD Yunba',
-  copyright: 'Ant Design Admin  © 2018 zuiidea',
+  copyright: ' Yunba  © 2019 ',
   logoPath: '/logo.svg',
   apiPrefix: '/api/v1',
   fixedHeader: true, // sticky primary layout header

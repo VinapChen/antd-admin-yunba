@@ -18,11 +18,13 @@ import styles from './sales.less'
 
 var str = []
 var url = ''
+var url1 = ''
 
 var jsonstr = '[]'
 var jsonarray = eval('(' + jsonstr + ')')
 var counter_jsonstr = '[]'
 var counter_jsonarray = eval('(' + counter_jsonstr + ')')
+var log_counter_jsonarray = eval('(' + counter_jsonstr + ')')
 var chartname = ''
 
 var allcounter = 0
@@ -35,7 +37,30 @@ function Sales({ data }) {
   //   console.log("time out");}
   // ,10000);
   url = 'http://0.0.0.0:8081/vars.do'
+  url1 = 'http://0.0.0.0:8082/vars.do'
   // url = 'http://127.0.0.1:5000/dataReturn'
+
+  fetch(url1)
+    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+      str = eval(res['ResultMsg'])
+      log_counter_jsonarray = eval('(' + counter_jsonstr + ')')
+
+      for (var i = 0; i < str.length; i++) {
+        var msg = eval(str[i])
+        if (msg['value'][0]['yVal'] == null) {
+          var jsonTemp = { name: msg['name'], value: 0 }
+        } else {
+          var jsonTemp = {
+            name: msg['name'],
+            value: msg['value'][0]['yVal'],
+          }
+        }
+
+        log_counter_jsonarray.push(jsonTemp)
+      }
+    })
 
   fetch(url)
     .then(res => res.json())
@@ -160,6 +185,7 @@ function Sales({ data }) {
 
   console.log('json arr', jsonarray)
   console.log('counter json arr', counter_jsonarray)
+  console.log('log counter', log_counter_jsonarray)
 
   return (
     <div>
@@ -181,9 +207,23 @@ function Sales({ data }) {
           </LineChart>
         </ResponsiveContainer>
       </div>
+
       <div className={styles.sales}>
         <div className={styles.title}>Counters</div>
         <BarChart width={600} height={250} data={counter_jsonarray}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          {/*<Bar dataKey="pv" fill="#8884d8" />*/}
+          <Bar dataKey="value" fill="#82ca9d" barSize={30} />
+        </BarChart>
+      </div>
+
+      <div className={styles.sales}>
+        <div className={styles.title}>lrs.log.counter</div>
+        <BarChart width={600} height={250} data={log_counter_jsonarray}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis />

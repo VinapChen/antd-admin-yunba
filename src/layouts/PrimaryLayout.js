@@ -145,7 +145,7 @@ class PrimaryLayout extends PureComponent {
             </Content>
             <BackTop
               className={styles.backTop}
-              target={() => document.querySelector('#primaryLayout>div')}
+              target={() => document.querySelector('#primaryLayout')}
             />
             <GlobalFooter
               className={styles.footer}

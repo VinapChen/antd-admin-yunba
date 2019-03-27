@@ -22,7 +22,7 @@ var url1 = ''
 
 var jsonstr = '[]'
 var jsonarray = eval('(' + jsonstr + ')')
-var counter_jsonstr = '[]'
+var counter_jsonstr = '[{"name":"counter","value":0}]'
 var counter_jsonarray = eval('(' + counter_jsonstr + ')')
 var log_counter_jsonarray = eval('(' + counter_jsonstr + ')')
 var chartname = ''
@@ -37,7 +37,8 @@ function Sales({ data }) {
   //   console.log("time out");}
   // ,10000);
   url = 'http://0.0.0.0:8081/vars.do'
-  url1 = 'http://t-nav.gionee.com/vars.do'
+  url1 = 'http://navlog.gionee.com/vars.do/'
+  // url1 = 'http://t-nav.gionee.com/vars.do'
   // url = 'http://127.0.0.1:5000/dataReturn'
 
   fetch(url1)
@@ -45,7 +46,7 @@ function Sales({ data }) {
     .then(res => {
       console.log(res)
       str = eval(res['ResultMsg'])
-      log_counter_jsonarray = eval('(' + counter_jsonstr + ')')
+      log_counter_jsonarray = eval('(' + jsonstr + ')')
 
       for (var i = 0; i < str.length; i++) {
         var msg = eval(str[i])
@@ -60,6 +61,13 @@ function Sales({ data }) {
 
         log_counter_jsonarray.push(jsonTemp)
       }
+
+      var jsonTemp = {
+        name: 'log.write.fail.counter',
+        value:
+          log_counter_jsonarray[0]['value'] - log_counter_jsonarray[1]['value'],
+      }
+      log_counter_jsonarray.push(jsonTemp)
     })
 
   // fetch(url)
@@ -184,8 +192,8 @@ function Sales({ data }) {
   // console.log(str.length)
   //
   // console.log('json arr', jsonarray)
-  // console.log('counter json arr', counter_jsonarray)
-  // console.log('log counter', log_counter_jsonarray)
+  // console.log(log_counter_jsonarray[0]['value'])
+  console.log('log counter', log_counter_jsonarray)
 
   return (
     <div>
@@ -226,7 +234,7 @@ function Sales({ data }) {
         <BarChart width={600} height={250} data={log_counter_jsonarray}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis />
+          <YAxis width={100} />
           <Tooltip />
           <Legend />
           {/*<Bar dataKey="pv" fill="#8884d8" />*/}

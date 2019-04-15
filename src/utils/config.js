@@ -2,6 +2,7 @@ module.exports = {
   siteName: '',
   copyright: ' ',
   logoPath: '/logo.svg',
+  devicePath: '/device.svg',
   apiPrefix: '/api/v1',
   fixedHeader: true, // sticky primary layout header
 

@@ -68,7 +68,7 @@ class Dashboard extends PureComponent {
             <Card
               bordered={false}
               bodyStyle={{
-                padding: '24px 36px 24px 0',
+                padding: '0px 0px 0px 0',
               }}
             >
               <Sales data={sales} />

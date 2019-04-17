@@ -26,8 +26,33 @@ var counterArrDevice0 = ''
 var parseArrDevice1 = ''
 var logArrDevice1 = ''
 var counterArrDevice1 = ''
+
+var parseArrDevice2 = ''
+var logArrDevice2 = ''
+var counterArrDevice2 = ''
+
+var parseArrDevice3 = ''
+var logArrDevice3 = ''
+var counterArrDevice3 = ''
+
+var parseArrDevice4 = ''
+var logArrDevice4 = ''
+var counterArrDevice4 = ''
+
+var parseArrDevice5 = ''
+var logArrDevice5 = ''
+var counterArrDevice5 = ''
+
+var parseArrDevice6 = ''
+var logArrDevice6 = ''
+var counterArrDevice6 = ''
+
+var parseArrDevice7 = ''
+var logArrDevice7 = ''
+var counterArrDevice7 = ''
+
 function latency_data_format(timeUnit, json_res) {
-  console.log('json_res', json_res)
+  // console.log('json_res', json_res)
 
   var jsonarray = eval('(' + jsonstr + ')')
   var date
@@ -48,7 +73,7 @@ function latency_data_format(timeUnit, json_res) {
   for (var i = 0; i < json_res['value'].length; i++) {
     if (json_res['value'][i]['xVal'] > json_res['value'][i + 1]['xVal']) {
       num = i + 1
-      console.log('num', num)
+      // console.log('num', num)
       break
     }
   }
@@ -125,10 +150,10 @@ function chart_data_format(str) {
 
     if (str[i]['name'] == 'parse.log.latency') {
       parselat_jsonarray = latency_data_format('ms', str[i])
-      console.log('parse log latency ', parselat_jsonarray)
+      // console.log('parse log latency ', parselat_jsonarray)
     } else if (str[i]['name'] == 'log.upload.latency') {
       uploadlat_jsonarray = latency_data_format('ns', str[i])
-      console.log('upload log latency', uploadlat_jsonarray)
+      // console.log('upload log latency', uploadlat_jsonarray)
     } else {
       if (msg['value'][0]['yVal'] == null) {
         var jsonTemp = { name: msg['name'], value: 0 }
@@ -148,7 +173,7 @@ function chart_data_format(str) {
         msg['name'] == 'log.write.success.counter'
       ) {
         logWriteFailCounter -= msg['value'][0]['yVal']
-        console.log('log write fail :', logWriteFailCounter)
+        // console.log('log write fail :', logWriteFailCounter)
         var jsonTemp = {
           name: 'log.write.fail.counter',
           value: logWriteFailCounter,
@@ -171,6 +196,12 @@ function Sales({ data }) {
   // url = 'http://0.0.0.0:8082/vars.do'
   var url = 'http://navlog.gionee.com/vars.do/'
   var url1 = 'http://navlog.gionee.com/vars.do1/'
+  var url2 = 'http://navlog.gionee.com/vars.do2/'
+  var url3 = 'http://navlog.gionee.com/vars.do3/'
+  var url4 = 'http://navlog.gionee.com/vars.do4/'
+  var url5 = 'http://navlog.gionee.com/vars.do5/'
+  var url6 = 'http://navlog.gionee.com/vars.do6/'
+  var url7 = 'http://navlog.gionee.com/vars.do7/'
   // url1 = 'http://t-nav.gionee.com/vars.do'
 
   fetch(url)
@@ -195,10 +226,7 @@ function Sales({ data }) {
   fetch(url1)
     .then(res => res.json())
     .then(res => {
-      // console.log(res)
       str = eval(res['ResultMsg'])
-      // console.log('resule msg length', str.length)
-      // console.log(str)
 
       var data = chart_data_format(str)
       console.log('data1', data)
@@ -211,103 +239,479 @@ function Sales({ data }) {
       console.log(rejected)
       str = rejected
     })
+  fetch(url2)
+    .then(res => res.json())
+    .then(res => {
+      str = eval(res['ResultMsg'])
 
-  // console.log(str.length)
-  //
-  // console.log('json arr', jsonarray)
-  // console.log(log_counter_jsonarray[0]['value'])
-  // console.log('counter json arr', counter_jsonarray)
+      var data = chart_data_format(str)
+      console.log('data2', data)
+
+      parseArrDevice2 = data[0]
+      logArrDevice2 = data[1]
+      counterArrDevice2 = data[2]
+    })
+    .catch(rejected => {
+      console.log(rejected)
+      str = rejected
+    })
+  fetch(url3)
+    .then(res => res.json())
+    .then(res => {
+      str = eval(res['ResultMsg'])
+
+      var data = chart_data_format(str)
+      console.log('data3', data)
+
+      parseArrDevice3 = data[0]
+      logArrDevice3 = data[1]
+      counterArrDevice3 = data[2]
+    })
+    .catch(rejected => {
+      console.log(rejected)
+      str = rejected
+    })
+  fetch(url4)
+    .then(res => res.json())
+    .then(res => {
+      str = eval(res['ResultMsg'])
+
+      var data = chart_data_format(str)
+      console.log('data4', data)
+
+      parseArrDevice4 = data[0]
+      logArrDevice4 = data[1]
+      counterArrDevice4 = data[2]
+    })
+    .catch(rejected => {
+      console.log(rejected)
+      str = rejected
+    })
+  fetch(url5)
+    .then(res => res.json())
+    .then(res => {
+      str = eval(res['ResultMsg'])
+
+      var data = chart_data_format(str)
+      console.log('data5', data)
+
+      parseArrDevice5 = data[0]
+      logArrDevice5 = data[1]
+      counterArrDevice5 = data[2]
+    })
+    .catch(rejected => {
+      console.log(rejected)
+      str = rejected
+    })
+  fetch(url6)
+    .then(res => res.json())
+    .then(res => {
+      str = eval(res['ResultMsg'])
+
+      var data = chart_data_format(str)
+      console.log('data6', data)
+
+      parseArrDevice6 = data[0]
+      logArrDevice6 = data[1]
+      counterArrDevice6 = data[2]
+    })
+    .catch(rejected => {
+      console.log(rejected)
+      str = rejected
+    })
+  fetch(url7)
+    .then(res => res.json())
+    .then(res => {
+      str = eval(res['ResultMsg'])
+
+      var data = chart_data_format(str)
+      console.log('data7', data)
+
+      parseArrDevice7 = data[0]
+      logArrDevice7 = data[1]
+      counterArrDevice7 = data[2]
+    })
+    .catch(rejected => {
+      console.log(rejected)
+      str = rejected
+    })
 
   return (
     <div>
-      <div className={styles.sales}>
-        <div className={styles.deviceFont}>
-          <img src={config.devicePath} />
-          {'Device 0'}
+      <div className={styles.deviceBox}>
+        <div className={styles.sales}>
+          <div className={styles.deviceFont}>
+            <img src={config.devicePath} />
+            {'Device 0'}
+          </div>
+          <div className={styles.title}>{'log.upload.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={logArrDevice0}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#8884d8" />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
-        <div className={styles.title}>{'log.upload.latency (ms)'}</div>
-        <ResponsiveContainer minHeight={360}>
-          <LineChart data={logArrDevice0}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="xVal" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="value" stroke="#8884d8" />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
 
-      <div className={styles.sales}>
-        <div className={styles.title}>{'log.parse.latency (ms)'}</div>
-        <ResponsiveContainer minHeight={360}>
-          <LineChart data={parseArrDevice0}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="xVal" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="value" stroke="#82ca9d" />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
-
-      <div className={styles.sales}>
-        <div className={styles.title}>lrs.log.counter</div>
-        <BarChart width={600} height={250} data={counterArrDevice0}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis width={100} />
-          <Tooltip />
-          <Legend />
-          {/*<Bar dataKey="pv" fill="#8884d8" />*/}
-          <Bar dataKey="value" fill="#82ca9d" barSize={35} />
-        </BarChart>
-      </div>
-
-      <div className={styles.sales}>
-        <div className={styles.deviceFont}>
-          <img src={config.devicePath} />
-          {'Device 1'}
+        <div className={styles.sales}>
+          <div className={styles.title}>{'log.parse.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={parseArrDevice0}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#82ca9d" />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
-        <div className={styles.title}>{'log.upload.latency (ms)'}</div>
-        <ResponsiveContainer minHeight={360}>
-          <LineChart data={logArrDevice1}>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>lrs.log.counter</div>
+          <BarChart width={600} height={250} data={counterArrDevice0}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="xVal" />
-            <YAxis />
+            <XAxis dataKey="name" />
+            <YAxis width={100} />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="value" stroke="#8884d8" />
-          </LineChart>
-        </ResponsiveContainer>
+            {/*<Bar dataKey="pv" fill="#8884d8" />*/}
+            <Bar dataKey="value" fill="#82ca9d" barSize={35} />
+          </BarChart>
+        </div>
       </div>
 
-      <div className={styles.sales}>
-        <div className={styles.title}>{'log.parse.latency (ms)'}</div>
-        <ResponsiveContainer minHeight={360}>
-          <LineChart data={parseArrDevice1}>
+      <div className={styles.deviceBox}>
+        <div className={styles.sales}>
+          <div className={styles.deviceFont}>
+            <img src={config.devicePath} />
+            {'Device 1'}
+          </div>
+          <div className={styles.title}>{'log.upload.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={logArrDevice1}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#8884d8" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>{'log.parse.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={parseArrDevice1}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#82ca9d" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>lrs.log.counter</div>
+          <BarChart width={600} height={250} data={counterArrDevice1}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="xVal" />
-            <YAxis />
+            <XAxis dataKey="name" />
+            <YAxis width={100} />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="value" stroke="#82ca9d" />
-          </LineChart>
-        </ResponsiveContainer>
+            {/*<Bar dataKey="pv" fill="#8884d8" />*/}
+            <Bar dataKey="value" fill="#82ca9d" barSize={35} />
+          </BarChart>
+        </div>
       </div>
 
-      <div className={styles.sales}>
-        <div className={styles.title}>lrs.log.counter</div>
-        <BarChart width={600} height={250} data={counterArrDevice1}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis width={100} />
-          <Tooltip />
-          <Legend />
-          {/*<Bar dataKey="pv" fill="#8884d8" />*/}
-          <Bar dataKey="value" fill="#82ca9d" barSize={35} />
-        </BarChart>
+      <div className={styles.deviceBox}>
+        <div className={styles.sales}>
+          <div className={styles.deviceFont}>
+            <img src={config.devicePath} />
+            {'Device 2'}
+          </div>
+          <div className={styles.title}>{'log.upload.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={logArrDevice2}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#8884d8" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>{'log.parse.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={parseArrDevice2}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#82ca9d" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>lrs.log.counter</div>
+          <BarChart width={600} height={250} data={counterArrDevice2}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis width={100} />
+            <Tooltip />
+            <Legend />
+            {/*<Bar dataKey="pv" fill="#8884d8" />*/}
+            <Bar dataKey="value" fill="#82ca9d" barSize={35} />
+          </BarChart>
+        </div>
+      </div>
+
+      <div className={styles.deviceBox}>
+        <div className={styles.sales}>
+          <div className={styles.deviceFont}>
+            <img src={config.devicePath} />
+            {'Device 3'}
+          </div>
+          <div className={styles.title}>{'log.upload.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={logArrDevice3}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#8884d8" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>{'log.parse.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={parseArrDevice3}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#82ca9d" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>lrs.log.counter</div>
+          <BarChart width={600} height={250} data={counterArrDevice3}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis width={100} />
+            <Tooltip />
+            <Legend />
+            {/*<Bar dataKey="pv" fill="#8884d8" />*/}
+            <Bar dataKey="value" fill="#82ca9d" barSize={35} />
+          </BarChart>
+        </div>
+      </div>
+
+      <div className={styles.deviceBox}>
+        <div className={styles.sales}>
+          <div className={styles.deviceFont}>
+            <img src={config.devicePath} />
+            {'Device 4'}
+          </div>
+          <div className={styles.title}>{'log.upload.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={logArrDevice4}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#8884d8" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>{'log.parse.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={parseArrDevice4}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#82ca9d" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>lrs.log.counter</div>
+          <BarChart width={600} height={250} data={counterArrDevice4}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis width={100} />
+            <Tooltip />
+            <Legend />
+            {/*<Bar dataKey="pv" fill="#8884d8" />*/}
+            <Bar dataKey="value" fill="#82ca9d" barSize={35} />
+          </BarChart>
+        </div>
+      </div>
+
+      <div className={styles.deviceBox}>
+        <div className={styles.sales}>
+          <div className={styles.deviceFont}>
+            <img src={config.devicePath} />
+            {'Device 5'}
+          </div>
+          <div className={styles.title}>{'log.upload.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={logArrDevice5}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#8884d8" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>{'log.parse.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={parseArrDevice5}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#82ca9d" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>lrs.log.counter</div>
+          <BarChart width={600} height={250} data={counterArrDevice5}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis width={100} />
+            <Tooltip />
+            <Legend />
+            {/*<Bar dataKey="pv" fill="#8884d8" />*/}
+            <Bar dataKey="value" fill="#82ca9d" barSize={35} />
+          </BarChart>
+        </div>
+      </div>
+
+      <div className={styles.deviceBox}>
+        <div className={styles.sales}>
+          <div className={styles.deviceFont}>
+            <img src={config.devicePath} />
+            {'Device 6'}
+          </div>
+          <div className={styles.title}>{'log.upload.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={logArrDevice6}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#8884d8" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>{'log.parse.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={parseArrDevice6}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#82ca9d" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>lrs.log.counter</div>
+          <BarChart width={600} height={250} data={counterArrDevice6}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis width={100} />
+            <Tooltip />
+            <Legend />
+            {/*<Bar dataKey="pv" fill="#8884d8" />*/}
+            <Bar dataKey="value" fill="#82ca9d" barSize={35} />
+          </BarChart>
+        </div>
+      </div>
+
+      <div className={styles.deviceBox}>
+        <div className={styles.sales}>
+          <div className={styles.deviceFont}>
+            <img src={config.devicePath} />
+            {'Device 7'}
+          </div>
+          <div className={styles.title}>{'log.upload.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={logArrDevice7}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#8884d8" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>{'log.parse.latency (ms)'}</div>
+          <ResponsiveContainer minHeight={360}>
+            <LineChart data={parseArrDevice7}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="xVal" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="value" stroke="#82ca9d" />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className={styles.sales}>
+          <div className={styles.title}>lrs.log.counter</div>
+          <BarChart width={600} height={250} data={counterArrDevice7}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis width={100} />
+            <Tooltip />
+            <Legend />
+            {/*<Bar dataKey="pv" fill="#8884d8" />*/}
+            <Bar dataKey="value" fill="#82ca9d" barSize={35} />
+          </BarChart>
+        </div>
       </div>
     </div>
   )
